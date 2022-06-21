@@ -10,6 +10,7 @@ import { WebTwain } from 'mobile-web-capture/dist/types/WebTwain';
 export class DocumentScannerComponent implements OnInit {
   dwtObject: WebTwain | undefined;
   videoSelect: HTMLSelectElement | undefined;
+  sourceDict: any = {};
 
   constructor() { }
 
@@ -17,7 +18,7 @@ export class DocumentScannerComponent implements OnInit {
     this.videoSelect = document.querySelector('select#videoSource') as HTMLSelectElement;
     Dynamsoft.DWT.ProductKey = "t0153KQMAAFzm97BAzFmaAN4P0OR9yW5t3IVDsP3gB0b4t/AA8J6ag3Erbn93uHLYhLObvZuJHuLXdkfKbHa33K+nlM8z7sMb0tgwHIPNhB6V6pQ6w6d5mZFmcFPnb+ytO/PGeTGo0xmeMBIb68/YuJl/PWQ/c294wkhs3Myd8fusuf7jR0B7y0wjwxNGYtMyX826Fkoq+AIDc56i";
     Dynamsoft.DWT.ResourcesPath = 'assets/dynamic-web-twain';
-    Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 720, Height: 720 }];
+    Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer', Width: 400, Height: 400 }];
     Dynamsoft.DWT.UseLocalService = false;
     Dynamsoft.DWT.Load();
     Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', () => { this.onReady(); });
@@ -30,8 +31,8 @@ export class DocumentScannerComponent implements OnInit {
 
       var option = this.videoSelect.options[index];
       if (this.dwtObject) {
-        this.dwtObject.Addon.Camera.selectSource(option.text).then(camera => {
-          if (this.videoSelect) this.createCameraScanner(option.text);
+        this.dwtObject.Addon.Camera.selectSource(this.sourceDict[option.text]).then(camera => {
+          if (this.videoSelect) this.createCameraScanner(this.sourceDict[option.text]);
         });
       }
 
@@ -73,7 +74,13 @@ export class DocumentScannerComponent implements OnInit {
       this.dwtObject.Addon.Camera.getSourceList().then((list) => {
         for (var i = 0; i < list.length; i++) {
           var option = document.createElement('option');
-          option.text = list[i].deviceId || list[i].label;
+          option.text = list[i].label || list[i].deviceId;
+          if (list[i].label) {
+            this.sourceDict[list[i].label] = list[i].deviceId;
+          }
+          else {
+            this.sourceDict[list[i].deviceId] = list[i].deviceId;
+          }
           if (this.videoSelect) this.videoSelect.options.add(option);
         }
 
