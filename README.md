@@ -53,6 +53,8 @@ typescript                      4.6.4
     ng serve --ssl
     ```
     
+    ![Angular document scanner](https://www.dynamsoft.com/codepool/img/2022/06/angular-document-scanner-desktop-browser.png)
+
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
