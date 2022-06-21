@@ -1,5 +1,10 @@
-<p>document-scanner works!</p>
+<h1>Angular Document Scanner</h1>
+<div class="select">
+    <label for="videoSource">Video source: </label>
+    <select id="videoSource"></select>
+    <button id="scanButton" (click)="scanDocument()">Scan Document</button>
+</div>
 
-<button id="scanButton" (click)="scanDocument()">Scan Document</button>
+<p>Document Container:</p>
 <div id="dwtcontrolContainer"></div>
 
