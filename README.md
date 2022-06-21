@@ -53,6 +53,8 @@ typescript                      4.6.4
     ng serve --ssl
     ```
     
+    ![document image ](https://www.dynamsoft.com/codepool/img/2022/06/document-image.png)
+    
     ![Angular document scanner](https://www.dynamsoft.com/codepool/img/2022/06/angular-document-scanner-desktop-browser.png)
 
 ## Build
