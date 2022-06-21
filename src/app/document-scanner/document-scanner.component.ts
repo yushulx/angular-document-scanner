@@ -18,7 +18,7 @@ export class DocumentScannerComponent implements OnInit {
     this.videoSelect = document.querySelector('select#videoSource') as HTMLSelectElement;
     Dynamsoft.DWT.ProductKey = "t0153KQMAAFzm97BAzFmaAN4P0OR9yW5t3IVDsP3gB0b4t/AA8J6ag3Erbn93uHLYhLObvZuJHuLXdkfKbHa33K+nlM8z7sMb0tgwHIPNhB6V6pQ6w6d5mZFmcFPnb+ytO/PGeTGo0xmeMBIb68/YuJl/PWQ/c294wkhs3Myd8fusuf7jR0B7y0wjwxNGYtMyX826Fkoq+AIDc56i";
     Dynamsoft.DWT.ResourcesPath = 'assets/dynamic-web-twain';
-    Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer'}];
+    Dynamsoft.DWT.Containers = [{ ContainerId: 'dwtcontrolContainer' }];
     Dynamsoft.DWT.UseLocalService = false;
     Dynamsoft.DWT.Load();
     Dynamsoft.DWT.RegisterEvent('OnWebTwainReady', () => { this.onReady(); });
@@ -38,6 +38,12 @@ export class DocumentScannerComponent implements OnInit {
 
     }
 
+  }
+
+  downloadDocument() {
+    if (this.dwtObject) {
+      this.dwtObject.SaveAsJPEG("document.jpg", this.dwtObject.CurrentImageIndexInBuffer);
+    }
   }
 
   onReady() {
