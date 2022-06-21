@@ -1,5 +1,9 @@
 #dwtcontrolContainer {
     width: 94vw;
-    height: 76vh;
+    height: 70vh;
     margin: auto;
+}
+
+.document-scanner {
+    text-align: center; 
 }
